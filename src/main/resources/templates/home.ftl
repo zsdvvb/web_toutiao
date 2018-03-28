@@ -22,7 +22,7 @@
                                         <button class="click-dislike down" aria-pressed="true" title="反对"><i class="vote-arrow"></i>
                                         </button>
                                     </div>
-                                    <div class="content" data-url="http://nowcoder.com/posts/5l3hjr">
+                                    <div class="content">
                                         <div >
                                             <#--进行在线切图-->
                                             <#--<img class="content-img" src=${nu.getNews().getImage()}-news_pic alt="">-->
@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="content-main">
                                             <h3 class="title">
-                                                <a target="_blank" rel="external nofollow" href="${nu.getNews().getLink()}">${nu.getNews().title}</a>
+                                                <a target="_blank" rel="external nofollow" href="/news/${nu.news.id}">${nu.getNews().title}</a>
                                             </h3>
                                             <div class="meta">
                                                 <p>${nu.getNews().getCreatedDate()?string('YY/MM/dd hh:mm:ss')}</p>

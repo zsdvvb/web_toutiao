@@ -18,4 +18,8 @@ public class ViewObject {
         return (User)objs.get("user");
     }
 
+    public Comment getComment() {
+        return (Comment)objs.get("comment");
+    }
+
 }
