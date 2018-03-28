@@ -60,7 +60,7 @@
                     }
                 }).done(function (oResult) {
                     if (oResult.code === 0) {
-                        //window.location.reload();
+//                        window.location.reload();
                         that.emit('login');
                     } else {
                         oResult.msgname && that.iptError(that.emailIpt, oResult.msgname);
@@ -90,8 +90,7 @@
                     }
                 }).done(function (oResult) {
                     if (oResult.code === 0) {
-                        //window.location.reload();
-
+//                        window.location.reload();
                         that.emit('register');
                     } else {
                         oResult.msgname && that.iptError(that.emailIpt, oResult.msgname);

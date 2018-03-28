@@ -24,6 +24,8 @@
                                     </div>
                                     <div class="content" data-url="http://nowcoder.com/posts/5l3hjr">
                                         <div >
+                                            <#--进行在线切图-->
+                                            <#--<img class="content-img" src=${nu.getNews().getImage()}-news_pic alt="">-->
                                             <img class="content-img" src=${nu.getNews().getImage()} alt="">
                                         </div>
                                         <div class="content-main">
@@ -58,10 +60,12 @@
     </div>
 
 
+<#if pop?exists>
 <#if pop == 1>
 <script>
 window.loginpop = ${pop};
 </script>
+</#if>
 </#if>
 
 <#include "footer.ftl">
