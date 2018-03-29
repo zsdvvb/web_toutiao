@@ -41,7 +41,7 @@ public class NewsController {
     @Autowired
     CommentService commentService;
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger logger = LoggerFactory.getLogger(NewsController.class);
 
     @RequestMapping(path={"/uploadImage/"}, method = {RequestMethod.POST})
     @ResponseBody

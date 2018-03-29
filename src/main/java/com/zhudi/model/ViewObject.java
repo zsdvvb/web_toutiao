@@ -22,4 +22,8 @@ public class ViewObject {
         return (Comment)objs.get("comment");
     }
 
+    public Message getMessage(){
+        return (Message)objs.get("message");
+    }
+
 }
