@@ -1,6 +1,7 @@
 package com.zhudi.controller;
 
 import com.zhudi.Utils.ToutiaoUtil;
+import com.zhudi.model.HostHolder;
 import com.zhudi.model.Message;
 import com.zhudi.model.User;
 import com.zhudi.model.ViewObject;
@@ -31,6 +32,9 @@ public class MessageController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     @RequestMapping(path = {"/msg/detail"}, method = {RequestMethod.GET})
     public String conversationDetail(Model model, @Param("conversationId")String conversationId){
@@ -70,5 +74,27 @@ public class MessageController {
             logger.error("添加消息失败" + e.getMessage());
             return ToutiaoUtil.getJSONString(1, "插入消息失败");
         }
+    }
+
+    @RequestMapping(path = {"/msg/list"}, method = {RequestMethod.GET})
+    public String conversationList(Model model){
+        try{
+            int localUserId = hostHolder.getUser().getId();
+            List<ViewObject> conversations = new ArrayList<ViewObject>();
+            List<Message> conversationList = messageService.getConversationList(localUserId, 0, 10);
+            for(Message msg : conversationList){
+                ViewObject vo = new ViewObject();
+                vo.set("message", msg);
+                int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
+                User user = userService.getUser(targetId);
+                vo.set("user", user);
+                vo.set("unread", messageService.getConversationUnreadCount(localUserId, msg.getConversationId()));
+                conversations.add(vo);
+            }
+            model.addAttribute("conversations", conversations);
+        }catch (Exception e){
+            logger.error("获取站内信失败" + e.getMessage());
+        }
+        return "letter";
     }
 }

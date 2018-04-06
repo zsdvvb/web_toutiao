@@ -10,6 +10,10 @@ public class ViewObject {
         objs.put(key, value);
     }
 
+    public Object get(String key){
+        return objs.get(key);
+    }
+
     public News getNews() {
         return (News)objs.get("news");
     }

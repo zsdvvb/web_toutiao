@@ -39,8 +39,11 @@
         PopupLogin.show({
             listeners: {
                 login: function () {
-                    //alert('login');
-                    window.location.reload();
+                    if (window.location.href.indexOf("?") > 0) {
+                        window.location.href = window.location.href.substring(0, window.location.href.indexOf("?"));
+                    } else {
+                        window.location.href = window.location.href;
+                    }
                 },
                 register: function () {
                     // window.location.reload();
