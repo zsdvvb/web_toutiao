@@ -18,9 +18,22 @@
                             </#if>
                                 <div class="post">
                                     <div class="votebar">
-                                        <button class="click-like up" aria-pressed="false" title="赞同"><i class="vote-arrow"></i><span class="count">${nu.news.likeCount}</span></button>
-                                        <button class="click-dislike down" aria-pressed="true" title="反对"><i class="vote-arrow"></i>
-                                        </button>
+
+                                        <#if nu.get("like")?exists>
+                                            <#if (nu.get("like") > 0)>
+                                            <button class="click-like up pressed" data-id="${nu.news.id}" title="赞同"><i class="vote-arrow"></i><span class="count">${nu.news.likeCount}</span></button>
+                                            <#else>
+                                            <button class="click-like up" data-id="${nu.news.id}" title="赞同"><i class="vote-arrow"></i><span class="count">${nu.news.likeCount}</span></button>
+                                            </#if>
+                                            <#if (nu.get("like") < 0)>
+                                            <button class="click-dislike down pressed" data-id="${nu.news.id}" title="反对"><i class="vote-arrow"></i></button>
+                                            <#else>
+                                            <button class="click-dislike down" data-id="${nu.news.id}" title="反对"><i class="vote-arrow"></i></button>
+                                            </#if>
+                                        <#else >
+                                            <button class="click-like up" data-id="${nu.news.id}" title="赞同"><i class="vote-arrow"></i><span class="count">${nu.news.likeCount}</span></button>
+                                             <button class="click-dislike down" data-id="${nu.news.id}" title="反对"><i class="vote-arrow"></i></button>
+                                        </#if>
                                     </div>
                                     <div class="content">
                                         <div >
@@ -67,5 +80,5 @@ window.loginpop = ${pop};
 </script>
 </#if>
 </#if>
-
+<script type="text/javascript" src="/scripts/main/site/detail.js"></script>
 <#include "footer.ftl">

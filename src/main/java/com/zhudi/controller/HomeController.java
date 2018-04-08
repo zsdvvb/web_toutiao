@@ -1,7 +1,10 @@
 package com.zhudi.controller;
 
+import com.zhudi.model.EntityType;
+import com.zhudi.model.HostHolder;
 import com.zhudi.model.News;
 import com.zhudi.model.ViewObject;
+import com.zhudi.service.LikeService;
 import com.zhudi.service.NewsService;
 import com.zhudi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,12 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    LikeService likeService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     //private List<ViewObject>
 
@@ -61,6 +70,7 @@ public class HomeController {
         String cur_date = null;
         List<ViewObject> temp = new ArrayList<>();;
         List<List<ViewObject>> vos = new ArrayList<>();
+        int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
         for(News news : newsList){
             if(cur_date == null){
                 cur_date = sdf.format(news.getCreatedDate());
@@ -74,6 +84,10 @@ public class HomeController {
             ViewObject vo = new ViewObject();
             vo.set("news", news);
             vo.set("user", userService.getUser(news.getUserId()));
+
+            if(localUserId != 0){
+                vo.set("like", likeService.getLikeStatus(localUserId, EntityType.ENTITY_NEWS, news.getId()));
+            }
             temp.add(vo);
         }
         vos.add(temp);  //装入最后一个temp
