@@ -34,10 +34,13 @@ public class LikeController {
     @RequestMapping(path={"/like"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String like(@RequestParam("newsId") int newsId){
+        if(hostHolder.getUser() == null){
+            return ToutiaoUtil.getJSONString(2, "您还未登陆~");
+        }
         int userId = hostHolder.getUser().getId();
         long likeCount = likeService.like(userId, EntityType.ENTITY_NEWS, newsId);
         News news = newsService.getById(newsId);
-        newsService.updateLikeCount(newsId, (int)likeCount);
+        //newsService.updateLikeCount(newsId, (int)likeCount);
 
         eventProducer.fireEvent(new EventModel(EventType.LIKE).setActorId(hostHolder.getUser().getId()).setEntityId(newsId)
                                     .setEntityType(EntityType.ENTITY_NEWS).setEntityOwnerId(news.getUserId()));
@@ -48,6 +51,9 @@ public class LikeController {
     @RequestMapping(path={"/dislike"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String disLike(@RequestParam("newsId") int newsId){
+        if(hostHolder.getUser() == null){
+            return ToutiaoUtil.getJSONString(2, "您还未登陆~");
+        }
         int userId = hostHolder.getUser().getId();
         long likeCount = likeService.disLike(userId, EntityType.ENTITY_NEWS, newsId);
         newsService.updateLikeCount(newsId, (int)likeCount);

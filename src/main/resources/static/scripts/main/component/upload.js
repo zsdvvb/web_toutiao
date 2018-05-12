@@ -87,7 +87,7 @@ var oUpload = new Upload({
                 },
                 error: function () {
                     oPopup && oPopup.close();
-                    alert('出现错误，请重试');
+                    alert('出现错误，请重试(code:3)');
                     oConf.error && oConf.error.apply(that, arguments);
                 },
                 progress: function (nProgress) {
@@ -118,7 +118,7 @@ var oUpload = new Upload({
             },
             error: function () {
                 oPopup && oPopup.close();
-                alert('出现错误，请重试');
+                alert('出现错误，请重试(code:4)');
                 oConf.error && oConf.error.apply(that, arguments);
             },
             progress: function (nProgress) {

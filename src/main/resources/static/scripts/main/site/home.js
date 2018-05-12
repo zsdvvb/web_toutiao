@@ -55,24 +55,33 @@
         });
     }
     function fClickLike(oEvent) {
-        alert("test");
         var that = this;
         var oEl = $(oEvent.currentTarget);
         var sId = $.trim(oEl.attr('data-id'));
         // 已经操作过 || 不存在Id || 正在提交 ，则忽略
-        if (oEl.hasClass('pressed') || !sId || that.actioning) {
+        if (!sId || that.actioning) {
             return;
         }
         that.actioning = true;
         ActionUtil.like({
             newsId: sId,
             call: function (oResult) {
-                oEl.find('span.count').html(oResult.msg);
-                oEl.addClass('pressed');
-                oEl.parent().find('.click-dislike').removeClass('pressed');
+                if(oEl.hasClass('pressed')){
+                    oEl.removeClass('pressed');
+                    oEl.find('span.count').html(oResult.msg);
+                }
+                else {
+                    oEl.find('span.count').html(oResult.msg);
+                    oEl.addClass('pressed');
+                    oEl.parent().find('.click-dislike').removeClass('pressed');
+                }
             },
-            error: function () {
-                alert('出现错误，请重试-from:home.js');
+            error: function (oResult) {
+                if(oResult.code == 2){
+                    alert(oResult.msg);
+                }else {
+                    alert('出现错误，请重试！');
+                }
             },
             always: function () {
                 that.actioning = false;
@@ -85,20 +94,30 @@
         var oEl = $(oEvent.currentTarget);
         var sId = $.trim(oEl.attr('data-id'));
         // 已经操作过 || 不存在Id || 正在提交 ，则忽略
-        if (oEl.hasClass('pressed') || !sId || that.actioning) {
+        if (!sId || that.actioning) {
             return;
         }
         that.actioning = true;
         ActionUtil.dislike({
             newsId: sId,
             call: function (oResult) {
-                oEl.addClass('pressed');
-                var oLikeBtn = oEl.parent().find('.click-like');
-                oLikeBtn.removeClass('pressed');
-                oLikeBtn.find('span.count').html(oResult.msg);
+                if(oEl.hasClass('pressed')){
+                    oEl.removeClass('pressed');
+                    oEl.find('span.count').html(oResult.msg);
+                }
+                else{
+                    oEl.addClass('pressed');
+                    var oLikeBtn = oEl.parent().find('.click-like');
+                    oLikeBtn.removeClass('pressed');
+                    oLikeBtn.find('span.count').html(oResult.msg);
+                }
             },
-            error: function () {
-                alert('出现错误，请重试');
+            error: function (oResult) {
+                if(oResult.code == 2){
+                    alert(oResult.msg);
+                }else {
+                    alert('出现错误，请重试！');
+                }
             },
             always: function () {
                 that.actioning = false;

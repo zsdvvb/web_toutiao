@@ -66,7 +66,7 @@ public class MessageController {
             msg.setContent(content);
             msg.setFromId(fromId);
             msg.setToId(toId);
-            msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
+            //msg.setConversationId(fromId < toId ? String.format("%d_%d", fromId, toId) : String.format("%d_%d", toId, fromId));
             msg.setCreatedDate(new Date());
             messageService.addMessage(msg);
             return ToutiaoUtil.getJSONString(msg.getId());

@@ -80,5 +80,5 @@ window.loginpop = ${pop};
 </script>
 </#if>
 </#if>
-<script type="text/javascript" src="/scripts/main/site/detail.js"></script>
+<script type="text/javascript" src="/scripts/main/site/home.js"></script>
 <#include "footer.ftl">

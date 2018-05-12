@@ -67,7 +67,7 @@
                         oResult.msgpwd && that.iptError(that.pwdIpt, oResult.msgpwd);
                     }
                 }).fail(function () {
-                    alert('出现错误，请重试');
+                    alert('出现错误，请重试(code:5)');
                 });
             }
         }, {
@@ -97,7 +97,7 @@
                         oResult.msgpwd && that.iptError(that.pwdIpt, oResult.msgpwd);
                     }
                 }).fail(function () {
-                    alert('出现错误，请重试');
+                    alert('出现错误，请重试(code:6)');
                 });
             }
         }],

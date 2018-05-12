@@ -46,7 +46,7 @@ var oPopupUpload = new PopupUpload({
                     call: function (oResult) {
                         var sUrl = $.trim(oResult.msg);
                         if (oResult.code !== 0) {
-                            return alert('出现错误，请重试');
+                            return alert('出现错误，请重试(code:7)');
                         }
                         that.image = sUrl;
                         that.showImage(sUrl);
@@ -81,7 +81,7 @@ var oPopupUpload = new PopupUpload({
                 }).done(function (oResult) {
                     that.emit('done');
                 }).fail(function (oResult) {
-                    alert('出现错误，请重试');
+                    alert('出现错误，请重试(code:8)');
                 }).always(function () {
                     that.requesting = false;
                 });

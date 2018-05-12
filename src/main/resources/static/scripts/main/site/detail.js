@@ -64,8 +64,12 @@
                 oEl.addClass('pressed');
                 oEl.parent().find('.click-dislike').removeClass('pressed');
             },
-            error: function () {
-                alert('出现错误，请重试');
+            error: function (oResult) {
+                if(oResult.code == 2){
+                    alert(oResult.msg);
+                }else {
+                    alert('出现错误，请重试！');
+                }
             },
             always: function () {
                 that.actioning = false;
@@ -90,8 +94,12 @@
                 oLikeBtn.removeClass('pressed');
                 oLikeBtn.find('span.count').html(oResult.msg);
             },
-            error: function () {
-                alert('出现错误，请重试');
+            error: function (oResult) {
+                if(oResult.code == 2){
+                    alert(oResult.msg);
+                }else {
+                    alert('出现错误，请重试！');
+                }
             },
             always: function () {
                 that.actioning = false;

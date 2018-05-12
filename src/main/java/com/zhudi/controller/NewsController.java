@@ -98,7 +98,7 @@ public class NewsController {
     @RequestMapping(path = {"/news/{newsId}"}, method = {RequestMethod.GET})
     public String newsDetail(@PathVariable("newsId") int newsId, Model model){
         News news = newsService.getById(newsId);
-        int localUserId = hostHolder != null ? hostHolder.getUser().getId() : 0;
+        int localUserId = (hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0);
         if(news != null){
             List<Comment> comments = commentService.getCommentsByEntity(news.getId(), EntityType.ENTITY_NEWS);
             List<ViewObject> commentsVOs = new ArrayList<ViewObject>();
